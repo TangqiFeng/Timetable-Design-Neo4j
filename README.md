@@ -19,7 +19,10 @@ In Neo4j, everything is stored in the form of either an edge(Relationship), a no
 ##### Nodes & Relationships:
 >The fundamental units that form a graph are nodes and relationships. In Neo4j, both nodes and relationships can contain properties. Nodes are often used to represent entities, but depending on the domain relationships may be used for that purpose as well. Apart from properties and relationships, nodes can also be labeled with zero or more labels.
 
+>A relationship between two nodes in the graph. A relationship has a start node, an end node and a type. You can attach properties to relationships with the API specified in PropertyContainer.
+
 ![Image of Neo4j Node](https://neo4j.com/docs/2.1.8/images/graphdb-nodes-overview.svg)
+![Image of Neo4j Relationship](http://www.markhneedham.com/blog/wp-content/uploads/2013/11/2013-11-23_21-43-57.png)
 
 ##### Labels:
 >A label is a named graph construct that is used to group nodes into sets. All nodes labeled with the same label belongs to the same set. Many database queries can work with these sets instead of the whole graph, making queries easier to write and more efficient. A node may be labeled with any number of labels, including none, making labels an optional addition to the graph.
