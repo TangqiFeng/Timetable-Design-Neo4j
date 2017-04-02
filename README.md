@@ -66,14 +66,58 @@ In Neo4j, everything is stored in the form of either an edge(Relationship), a no
 - room :{ name, capacity }
 
 #### design diagram:
-![Image of logical design1](https://cloud.githubusercontent.com/assets/22374434/24588195/a34b4876-17bb-11e7-9a21-1784d7adda8d.png)
+![Image of logical design1](https://cloud.githubusercontent.com/assets/22374434/24590969/e33e4716-17ee-11e7-8e74-4ae8680e6ad8.png)
 
-![Image of logical design2](https://cloud.githubusercontent.com/assets/22374434/24588196/a7b25a1c-17bb-11e7-880b-2d07b83d4f6e.png)
+![Image of logical design2](https://cloud.githubusercontent.com/assets/22374434/24590971/e5254ee4-17ee-11e7-96b2-139cf9587392.png)
 
 #### design benifits:
 Easy to get courses by three ways: student, stuff and room
 
 That means: student and lecturer can get their individual course info, also can get course info by search specific room.
 
-## How to search courses?
+## How to use?
+### (Note: Timetable trsting data is from GMIT-COMP_GA_KSOFG_B070306)
+
+- get all programs:
+> match (m:Program) return m;
+
+- get all lecturers:
+> match (m:Lecturer) return m;
+
+- get all rooms:
+> match (m:Room) return m;
+
+- As a stuff, to find his individual timetable:
+e.g. lecturer name: Ian Mcloughlin
+> match (lecturer:Lecturer {name:'Ian Mcloughlin'})-[:TEACH_IN]->(courses:Course)-[:HELD_IN]->(room:Room)
+return lecturer,courses,room;
+
+- As a student, to find his individual timetable:
+e.g. student from 'G-KSOFG73 BSc in Computing in Software Development L7 Yr 3 Sem 6','Dept of Computer Science &amp; Applied Physics'
+
+> match (program:Program {name:'G-KSOFG73 BSc in Computing in Software Development L7', year_sem:'3 , 6', department:"Dept of Computer Science & Applied Physics"})-[:ATTEND]->(courses:Course)-[:HELD_IN]->(room:Room)
+return program,courses,room;
+
+different lab groups:  e.g. A
+
+> match (program:Program {name:'G-KSOFG73 BSc in Computing in Software Development L7', year_sem:'3 , 6', department:"Dept of Computer Science & Applied Physics"})-[:ATTEND]->(courses:Course **{student_group:"A"}**)-[:HELD_IN]->(room:Room)
+return program,courses,room; 
+
+- Search by room with specific day/time:
+e.g. room '0436 CR5'   all courses
+
+> match (room:Room {name:'0436 CR5'})<-[:HELD_IN]-(courses:Course)<-[:TEACH_IN]-(lecturers:Lecturer)
+return room,courses,lecturers
+
+e.g. room '0436 CR5'   all courses in Monday
+
+> match (room:Room {name:'0436 CR5'})<-[:HELD_IN]-(courses:Course **{day:'monday'}**)<-[:TEACH_IN]-(lecturers:Lecturer)
+return room,courses,lecturers
+
+e.g. room '0436 CR5'   all courses in Tuesday 14.00-16.00
+
+> match (room:Room {name:'0436 CR5'})<-[:HELD_IN]-(courses:Course **{day:'tuesday', timeslot:'14.00-16.00'}**)<-[:TEACH_IN]-(lecturers:Lecturer)
+return room,courses,lecturers
+
 ## Conclusion
+Graph databases are very adept at working with not just single points of information, but also evolving relationship networks. It works particularly well when the relationships inside your data are important and your queries depend on exploring and exploiting them.
