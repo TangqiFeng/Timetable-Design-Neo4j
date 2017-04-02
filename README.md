@@ -30,14 +30,48 @@ In Neo4j, everything is stored in the form of either an edge(Relationship), a no
 ![Image of Label](https://neo4j.com/docs/2.1.8/images/graphdb-labels.svg)
 
 ## What information does a timetabling system need to store?
-###### Rooms
+- Room Number
 
-###### Work hours
+- day & Timeslot
 
-###### Student groups
+- year & department & program & student groups
 
-###### Lecturers
+- subject (course name)
+
+- Lecturers
 
 ## How to store timetabling data in Neo4j?
 
+#### labels: 
+- lecturer       
+- program       
+- course   
+- room
+
+#### nodes: 
+- lecturer  
+- program  
+- subject
+- room
+
+#### relationships: 
+- lecturer --TEACH_IN--> subject
+- program --ATTEND--> subject
+- subject --HELD_IN--> room
+
+#### properties: 
+- lecturer :{ name }
+- program :{ name, year, department }
+- subject :{ name, day, timeslot, studentGroup }
+- room :{ name, capacity }
+
+#### design diagram:
+![Image of logical design](https://cloud.githubusercontent.com/assets/22374434/24587723/ac05cc1e-17b3-11e7-8189-f9bc10b36de7.png)
+
+#### design benifits:
+Easy to get courses by three ways: student, stuff and room
+
+That means: student and lecturer can get their individual course info, also can get course info by search specific room.
+
+## How to search courses?
 ## Conclusion
