@@ -66,7 +66,9 @@ In Neo4j, everything is stored in the form of either an edge(Relationship), a no
 - room :{ name, capacity }
 
 #### design diagram:
-![Image of logical design](https://cloud.githubusercontent.com/assets/22374434/24587723/ac05cc1e-17b3-11e7-8189-f9bc10b36de7.png)
+![Image of logical design1](https://cloud.githubusercontent.com/assets/22374434/24588195/a34b4876-17bb-11e7-9a21-1784d7adda8d.png)
+
+![Image of logical design2](https://cloud.githubusercontent.com/assets/22374434/24588196/a7b25a1c-17bb-11e7-880b-2d07b83d4f6e.png)
 
 #### design benifits:
 Easy to get courses by three ways: student, stuff and room
